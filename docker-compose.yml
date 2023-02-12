@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  front:
+    build: ./frontend/
+    restart: always
+    ports:
+      - "8080:80"
+    expose:
+      - "80"
+  api:
+    build: ./backend/
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend/:/code
+    expose:
+      - "5000"
+  db:
+    image: mongo:latest
+    hostname: interview_mongodb
+    environment:
+      - MONGO_INITDB_DATABASE=interview
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    volumes:
+      - ./init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
+      - persistent4:/data/db
+    ports:
+      - "27017:27017"
+volumes:
+  persistent4:

@@ -1,0 +1,63 @@
+<div class="flex p-10">
+  <table mat-table [dataSource]="interviews" class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Interview_id</th>
+      <td mat-cell *matCellDef="let element">{{ element.interview_id }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="panel">
+      <th mat-header-cell *matHeaderCellDef>Panel Members</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngFor="let employee of element.employees">
+          {{ employee.name }}
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.date.day }}/{{ element.date.month }}/{{ element.date.year }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="slot">
+      <th mat-header-cell *matHeaderCellDef>Slot</th>
+      <td mat-cell *matCellDef="let element">{{ element.slot }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="candidateName">
+      <th mat-header-cell *matHeaderCellDef>Candidate Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.candidate.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>actions</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="OnUpdate()">
+            <span>Update</span>
+          </button>
+          <button mat-menu-item (click)="OnDelete()">
+            <span>Delete</span>
+          </button>
+        </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
