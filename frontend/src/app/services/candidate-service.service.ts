@@ -7,7 +7,7 @@ import { InterviewModal } from '../interfaces/interview';
 })
 export class CandidateService {
   constructor(private http: HttpClient) {}
-  configUrl: string = 'http://127.0.0.1:5000/home';
+  configUrl: string = 'http://localhost:80/home';
   public getInterviewTableData(): Observable<InterviewModal[]> {
     // let data = [
     //   { id: 1, candidateName: 'shankar', interviewTime: Date.now().toString() },

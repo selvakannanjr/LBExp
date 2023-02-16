@@ -6,4 +6,4 @@ RUN pip install -r requirements.txt
 COPY . /code/
 EXPOSE 5000
 ENV PYTHONPATH /code
-CMD ["python","/code/application/run.py","--host", "0.0.0.0"]
+CMD ["gunicorn","-b","0.0.0.0:5000","application.run:app"]
